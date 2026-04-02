@@ -8,6 +8,8 @@ def index(request):
 
 
 def categories_by_slug(request, cat_slug):
+    if request.GET:
+        print(request.GET)
     return HttpResponse(f"<h1>Статьи по категориям</h1><p>slug: {cat_slug}</p>")
 
 
