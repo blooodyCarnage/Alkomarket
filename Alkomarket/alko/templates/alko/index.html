@@ -1,0 +1,23 @@
+{% extends 'alko/base.html' %}
+
+{% block content %}
+    <h1>{{ title|capfirst }}</h1>
+    
+    {% if posts %}
+        <ul class="product-list">
+        {% for p in posts %}
+            {% if p.is_published %}
+                <li>
+                    <h3>{{ p.title|upper }}</h3>
+                    <p>{{ p.content|linebreaks|truncatewords:30 }}</p>
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет доступных статей</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Алкомаркет{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'alko/css/styles.css' %}">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="container header-row">
+      <a class="brand" href="{% url 'home' %}">
+        <span class="brand-mark"></span>
+        <span class="brand-text">Алкомаркет</span>
+      </a>
+    </div>
+  </header>
+
+  <nav class="app-nav">
+    <div class="container nav-row">
+      <a class="nav-link" href="{% url 'home' %}"> Главная</a>
+      <a class="nav-link" href="{% url 'about' %}"> О сайте</a>
+      <a class="nav-link" href="{% url 'contact' %}"> Контакты</a>
+
+      <div class="nav-dropdown">
+        <button class="nav-link nav-dropbtn" type="button"> Категории ▾</button>
+        <div class="nav-dropmenu">
+          <a href="{% url 'cats' 'whiskey' %}"> Виски</a>
+          <a href="{% url 'cats' 'wine' %}"> Вино</a>
+          <a href="{% url 'cats' 'beer' %}"> Пиво</a>
+          <a href="{% url 'cats' 'cognac' %}"> Коньяк</a>
+          <a href="{% url 'cats' 'vodka' %}"> Водка</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <button class="nav-link nav-dropbtn" type="button"> Архив ▾</button>
+        <div class="nav-dropmenu">
+          <a href="{% url 'archive' 2024 %}">2024 год</a>
+          <a href="{% url 'archive' 2023 %}">2023 год</a>
+          <a href="{% url 'archive' 2022 %}">2022 год</a>
+          <a href="{% url 'archive' 2021 %}">2021 год</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-main">
+    <div class="container">
+      {% if messages %}
+        <div class="flash-stack">
+          {% for message in messages %}
+            <div class="flash flash-{{ message.tags|default:'info' }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% block content %}
+      <div class="welcome">
+        <h1>Добро пожаловать в Алкомаркет! </h1>
+        <p>Широкий выбор алкогольных напитков на любой вкус</p>
+      </div>
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>© 2026 Алкомаркет. Все права защищены.</p>
+      <p style="font-size: 12px; margin-top: 8px;">В продаже алкогольная продукция только лицам старше 18 лет</p>
+    </div>
+  </footer>
+</body>
+</html>

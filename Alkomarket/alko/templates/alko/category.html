@@ -1,0 +1,19 @@
+{% extends 'alko/base.html' %}
+
+{% block content %}
+    <h1>Категория: {{ category_name|capfirst }}</h1>
+    <p>Товары в категории "{{ category_name }}"</p>
+    
+    {% if products %}
+        <ul class="product-list">
+        {% for product in products %}
+            <li>
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.content|truncatewords:20 }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>В этой категории пока нет товаров</p>
+    {% endif %}
+{% endblock %}
